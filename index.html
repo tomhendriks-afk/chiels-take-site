@@ -380,10 +380,14 @@ footer a:hover { color: var(--text); }
       <h3>Get notified when Chiel publishes</h3>
       <p>AI strategy perspectives for business leaders. No fixed schedule — just substance when there's something worth saying.</p>
     </div>
-    <div class="subscribe-form">
-      <input type="email" placeholder="your@email.com">
-      <button>Subscribe</button>
-    </div>
+    <form class="subscribe-form"
+          action="https://buttondown.com/api/emails/embed-subscribe/ambientadvantage"
+          method="post" target="_blank">
+      <input type="email" name="email" required placeholder="your@email.com">
+      <input type="hidden" name="embed" value="1">
+      <input type="hidden" name="tag" value="chiels-take">
+      <button type="submit">Subscribe</button>
+    </form>
   </div>
 </div>
 
