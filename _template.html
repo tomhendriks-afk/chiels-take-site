@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{TITLE}} — Chiel's Take</title>
+<meta name="description" content="{{META_DESCRIPTION}}">
+<meta property="og:title" content="{{TITLE}} — Chiel's Take">
+<meta property="og:description" content="{{OG_DESCRIPTION}}">
+<meta property="og:type" content="article">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-0: #05070d;
+  --bg-1: #0a0f1c;
+  --bg-2: #0f1628;
+  --line: rgba(120,170,255,.14);
+  --text: #e8eefc;
+  --mute: #8a97b4;
+  --accent: #4ea8ff;
+  --warm: #f5a623;
+  --warm-soft: rgba(245,166,35,.08);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  background: var(--bg-0);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* NAV */
+nav.top {
+  position: sticky; top: 0; z-index: 20;
+  backdrop-filter: blur(14px);
+  background: rgba(5,7,13,.6);
+  border-bottom: 1px solid var(--line);
+  padding: 0 28px;
+}
+.nav-inner {
+  max-width: 1180px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 56px;
+}
+.logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: .02em; color: var(--text); }
+.logo a { color: var(--text); }
+.logo a:hover { text-decoration: none; }
+.logo-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 40px rgba(78,168,255,.35); margin-right: 8px; }
+.nav-links { display: flex; gap: 28px; font-size: 14px; font-family: 'Space Grotesk', sans-serif; }
+.nav-links a { color: var(--mute); transition: color .2s; }
+.nav-links a:hover { color: var(--text); text-decoration: none; }
+.nav-links a.active { color: var(--warm); font-weight: 500; }
+.nav-cta {
+  border: 1px solid var(--line); padding: 9px 16px; border-radius: 999px;
+  background: linear-gradient(180deg, rgba(78,168,255,.12), rgba(78,168,255,.02));
+  font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 500;
+  color: var(--accent); letter-spacing: .02em; transition: border-color .2s;
+}
+.nav-cta:hover { border-color: var(--accent); text-decoration: none; }
+
+/* ARTICLE */
+.article-wrapper {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 28px 80px;
+}
+.article-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; color: var(--warm);
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: .04em; font-weight: 500;
+  margin-bottom: 32px;
+}
+.article-back:hover { text-decoration: none; opacity: .8; }
+.article-tag {
+  display: inline-block; font-size: 10px; color: var(--warm);
+  border: 1px solid rgba(245,166,35,.25); border-radius: 999px;
+  padding: 3px 10px; margin-bottom: 16px;
+  font-family: 'Space Grotesk', sans-serif; letter-spacing: .08em; text-transform: uppercase;
+}
+.article-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 700; line-height: 1.15;
+  margin-bottom: 20px;
+}
+.article-meta {
+  display: flex; align-items: center; gap: 16px;
+  font-size: 14px; color: var(--mute);
+  font-family: 'Space Grotesk', sans-serif;
+  margin-bottom: 40px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--line);
+}
+.article-meta .author { color: var(--warm); font-weight: 500; }
+
+.article-body {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #c8d2e6;
+}
+.article-body p {
+  margin-bottom: 24px;
+}
+.article-body h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 48px;
+  margin-bottom: 20px;
+}
+.article-body em {
+  color: var(--mute);
+  font-style: italic;
+}
+
+.article-footer {
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+.article-disclaimer {
+  font-size: 13px;
+  color: var(--mute);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* SUBSCRIBE */
+.subscribe-section {
+  max-width: 720px; margin: 0 auto 64px; padding: 0 28px;
+}
+.subscribe-inner {
+  background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 36px;
+  text-align: center;
+}
+.subscribe-inner h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px; font-weight: 600; margin-bottom: 6px;
+}
+.subscribe-inner p { font-size: 14px; color: var(--mute); line-height: 1.6; margin-bottom: 20px; }
+.subscribe-form {
+  display: flex; gap: 10px; justify-content: center;
+}
+.subscribe-form input[type="email"] {
+  width: 260px; padding: 12px 16px;
+  background: var(--bg-0); border: 1px solid var(--line);
+  border-radius: 10px; color: var(--text);
+  font-family: 'Inter', sans-serif; font-size: 14px;
+  outline: none; transition: border-color .2s;
+}
+.subscribe-form input[type="email"]:focus { border-color: var(--warm); }
+.subscribe-form button {
+  padding: 12px 24px;
+  background: linear-gradient(180deg, var(--warm), #d4900f);
+  border: none; border-radius: 10px;
+  color: var(--bg-0); font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px; font-weight: 600;
+  cursor: pointer; transition: opacity .2s; white-space: nowrap;
+}
+.subscribe-form button:hover { opacity: .9; }
+
+/* FOOTER */
+footer {
+  max-width: 1180px; margin: 0 auto;
+  padding: 32px 28px;
+  border-top: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 13px; color: var(--mute);
+  font-family: 'Space Grotesk', sans-serif;
+}
+footer a { color: var(--mute); }
+footer a:hover { color: var(--text); }
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .article-wrapper { padding: 32px 20px 60px; }
+  .article-title { font-size: 26px; }
+  .subscribe-form { flex-direction: column; }
+  .subscribe-form input[type="email"] { width: 100%; }
+  footer { flex-direction: column; gap: 8px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="nav-inner">
+    <div class="logo"><a href="index.html"><span class="logo-dot"></span>Ambient Advantage</a></div>
+    <div class="nav-links">
+      <a href="https://podcast.ambient-advantage.ai">Podcast</a>
+      <a href="https://briefing.ambient-advantage.ai">Daily Briefing</a>
+      <a href="index.html" class="active">Chiel's Take</a>
+      <a href="https://podcast.ambient-advantage.ai#about">About</a>
+    </div>
+    <a href="#subscribe" class="nav-cta">Subscribe</a>
+  </div>
+</nav>
+
+<article class="article-wrapper">
+  <a href="index.html" class="article-back">&larr; All takes</a>
+
+  <span class="article-tag">{{TAG}}</span>
+  <h1 class="article-title">{{TITLE}}</h1>
+  <div class="article-meta">
+    <span class="author">Chiel Hendriks</span>
+    <span>&middot;</span>
+    <span>{{READ_TIME}} min read</span>
+    <span>&middot;</span>
+    <span>{{DATE_DISPLAY}}</span>
+  </div>
+
+  <div class="article-body">
+    {{ARTICLE_BODY}}
+  </div>
+
+  <div class="article-footer">
+    <p class="article-disclaimer">The views expressed in this article are my own and do not reflect the views of PwC. Chiel Hendriks is a Managing Director at PwC Canada. "Chiel's Take" is published on Ambient Advantage.</p>
+  </div>
+</article>
+
+<!-- SUBSCRIBE -->
+<div class="subscribe-section" id="subscribe">
+  <div class="subscribe-inner">
+    <h3>Get notified when Chiel publishes</h3>
+    <p>AI strategy perspectives for business leaders. No fixed schedule — just substance when there's something worth saying.</p>
+    <form class="subscribe-form"
+          action="https://buttondown.com/api/emails/embed-subscribe/ambientadvantage"
+          method="post" target="_blank">
+      <input type="email" name="email" required placeholder="your@email.com">
+      <input type="hidden" name="embed" value="1">
+      <input type="hidden" name="tag" value="chiels-take">
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>&copy; 2026 Ambient Advantage</div>
+  <div>
+    <a href="https://briefing.ambient-advantage.ai" style="margin-right:20px">Daily Briefing</a>
+    <a href="https://podcast.ambient-advantage.ai" style="margin-right:20px">Podcast</a>
+    <a href="index.html">Chiel's Take</a>
+  </div>
+</footer>
+
+</body>
+</html>
