@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chiel's Take — Ambient Advantage</title>
+<meta name="description" content="AI strategy perspectives for business leaders. Where the daily briefing tells you what happened in AI, this column tells you what it means — and what to do about it.">
+<meta property="og:title" content="Chiel's Take — Ambient Advantage">
+<meta property="og:description" content="AI strategy perspectives for business leaders by Chiel Hendriks.">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-0: #05070d;
+  --bg-1: #0a0f1c;
+  --bg-2: #0f1628;
+  --line: rgba(120,170,255,.14);
+  --text: #e8eefc;
+  --mute: #8a97b4;
+  --accent: #4ea8ff;
+  --warm: #f5a623;
+  --warm-soft: rgba(245,166,35,.08);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  background: var(--bg-0);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* NAV */
+nav.top {
+  position: sticky; top: 0; z-index: 20;
+  backdrop-filter: blur(14px);
+  background: rgba(5,7,13,.6);
+  border-bottom: 1px solid var(--line);
+  padding: 0 28px;
+}
+.nav-inner {
+  max-width: 1180px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 56px;
+}
+.logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: .02em; color: var(--text); }
+.logo a { color: var(--text); }
+.logo a:hover { text-decoration: none; }
+.logo-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 40px rgba(78,168,255,.35); margin-right: 8px; }
+.nav-links { display: flex; gap: 28px; font-size: 14px; font-family: 'Space Grotesk', sans-serif; }
+.nav-links a { color: var(--mute); transition: color .2s; }
+.nav-links a:hover { color: var(--text); text-decoration: none; }
+.nav-links a.active { color: var(--warm); font-weight: 500; }
+.nav-cta {
+  border: 1px solid var(--line); padding: 9px 16px; border-radius: 999px;
+  background: linear-gradient(180deg, rgba(78,168,255,.12), rgba(78,168,255,.02));
+  font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 500;
+  color: var(--accent); letter-spacing: .02em; transition: border-color .2s;
+}
+.nav-cta:hover { border-color: var(--accent); text-decoration: none; }
+
+/* FEATURED TAKE — Full width hero */
+.featured-take {
+  margin: 32px auto 0;
+  max-width: 1180px; padding: 0 28px;
+}
+.featured-take-inner {
+  background: linear-gradient(135deg, rgba(245,166,35,.07) 0%, rgba(245,166,35,.02) 50%, rgba(78,168,255,.03) 100%);
+  border: 1px solid rgba(245,166,35,.22);
+  border-radius: 20px;
+  padding: 48px 56px;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 48px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.featured-take-inner::before {
+  content: '';
+  position: absolute; top: -80px; right: -80px;
+  width: 240px; height: 240px;
+  background: radial-gradient(circle, rgba(245,166,35,.1), transparent 70%);
+  pointer-events: none;
+}
+
+.ft-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--warm);
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: .1em; text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.ft-label-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--warm);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .4; }
+}
+.ft-tag {
+  display: inline-block; font-size: 10px; color: var(--warm);
+  border: 1px solid rgba(245,166,35,.25); border-radius: 999px;
+  padding: 3px 10px; margin-bottom: 14px;
+  font-family: 'Space Grotesk', sans-serif; letter-spacing: .08em; text-transform: uppercase;
+}
+.ft-headline {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 700; line-height: 1.2;
+  margin-bottom: 16px;
+}
+.ft-headline a { color: var(--text); }
+.ft-headline a:hover { color: var(--warm); text-decoration: none; }
+.ft-excerpt {
+  font-size: 16px; color: #b8c4db; line-height: 1.7;
+  margin-bottom: 20px;
+}
+.ft-meta {
+  display: flex; align-items: center; gap: 16px;
+  font-size: 13px; color: var(--mute);
+  font-family: 'Space Grotesk', sans-serif;
+}
+.ft-meta .author { color: var(--warm); font-weight: 500; }
+.ft-read-btn {
+  display: inline-block; margin-top: 20px;
+  padding: 12px 28px;
+  background: linear-gradient(180deg, rgba(245,166,35,.15), rgba(245,166,35,.05));
+  border: 1px solid rgba(245,166,35,.3);
+  border-radius: 999px;
+  color: var(--warm);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px; font-weight: 500; letter-spacing: .04em;
+  transition: border-color .2s, background .2s;
+}
+.ft-read-btn:hover { border-color: var(--warm); background: rgba(245,166,35,.12); text-decoration: none; }
+
+/* Author card (right side) */
+.ft-author {
+  text-align: center;
+  padding: 28px 24px;
+  background: rgba(5,7,13,.4);
+  border: 1px solid rgba(245,166,35,.12);
+  border-radius: 16px;
+}
+.ft-author-avatar {
+  width: 68px; height: 68px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--warm), #d49000);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Space Grotesk', sans-serif; font-weight: 700;
+  font-size: 22px; color: var(--bg-0);
+  margin: 0 auto 14px;
+  box-shadow: 0 0 30px rgba(245,166,35,.2);
+}
+.ft-author-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 17px; font-weight: 600; margin-bottom: 4px;
+}
+.ft-author-title {
+  font-size: 12px; color: var(--mute); margin-bottom: 14px; line-height: 1.5;
+}
+.ft-author-bio {
+  font-size: 13px; color: #b8c4db; line-height: 1.6;
+  text-align: left;
+}
+
+/* EMPTY STATE (shown when there's only one article) */
+.intro-section {
+  max-width: 1180px; margin: 48px auto 0; padding: 0 28px;
+}
+.intro-inner {
+  background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 48px;
+  text-align: center;
+}
+.intro-inner h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 22px; font-weight: 600; margin-bottom: 12px;
+}
+.intro-inner p {
+  font-size: 15px; color: var(--mute); line-height: 1.7;
+  max-width: 560px; margin: 0 auto;
+}
+.intro-links {
+  margin-top: 24px;
+  display: flex; gap: 20px; justify-content: center;
+  font-family: 'Space Grotesk', sans-serif; font-size: 14px;
+}
+.intro-links a {
+  padding: 10px 20px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--accent);
+  transition: border-color .2s;
+}
+.intro-links a:hover { border-color: var(--accent); text-decoration: none; }
+
+/* PREVIOUS TAKES */
+.prev-section {
+  max-width: 1180px; margin: 48px auto 0; padding: 0 28px;
+}
+.prev-section-header {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 20px;
+}
+.prev-section-header h2 {
+  font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 600;
+}
+.takes-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+.take-card {
+  background: linear-gradient(180deg, rgba(245,166,35,.05), rgba(245,166,35,.01));
+  border: 1px solid rgba(245,166,35,.15);
+  border-radius: 16px; padding: 28px;
+  transition: border-color .2s, transform .2s;
+}
+.take-card:hover { border-color: rgba(245,166,35,.4); transform: translateY(-2px); }
+.take-tag {
+  display: inline-block; font-size: 10px; color: var(--warm);
+  border: 1px solid rgba(245,166,35,.2); border-radius: 999px;
+  padding: 3px 10px; margin-bottom: 12px;
+  font-family: 'Space Grotesk', sans-serif; letter-spacing: .08em; text-transform: uppercase;
+}
+.take-date {
+  font-size: 11px; color: var(--warm); opacity: .7;
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: .1em; text-transform: uppercase; margin-bottom: 10px;
+}
+.take-card h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 17px; font-weight: 600; line-height: 1.35; margin-bottom: 10px;
+}
+.take-card h3 a { color: var(--text); }
+.take-card h3 a:hover { color: var(--warm); text-decoration: none; }
+.take-excerpt {
+  font-size: 14px; color: #b8c4db; line-height: 1.65; margin-bottom: 14px;
+}
+.take-read {
+  font-size: 12px; color: var(--warm);
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: .05em; font-weight: 500;
+}
+
+/* SUBSCRIBE */
+.subscribe-section {
+  max-width: 1180px; margin: 56px auto; padding: 0 28px;
+}
+.subscribe-inner {
+  background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 40px;
+  display: flex; align-items: center; justify-content: space-between; gap: 32px;
+}
+.subscribe-text h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 22px; font-weight: 600; margin-bottom: 6px;
+}
+.subscribe-text p { font-size: 14px; color: var(--mute); line-height: 1.6; }
+.subscribe-form {
+  display: flex; gap: 10px; flex-shrink: 0;
+}
+.subscribe-form input {
+  width: 260px; padding: 12px 16px;
+  background: var(--bg-0); border: 1px solid var(--line);
+  border-radius: 10px; color: var(--text);
+  font-family: 'Inter', sans-serif; font-size: 14px;
+  outline: none; transition: border-color .2s;
+}
+.subscribe-form input:focus { border-color: var(--warm); }
+.subscribe-form button {
+  padding: 12px 24px;
+  background: linear-gradient(180deg, var(--warm), #d4900f);
+  border: none; border-radius: 10px;
+  color: var(--bg-0); font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px; font-weight: 600;
+  cursor: pointer; transition: opacity .2s; white-space: nowrap;
+}
+.subscribe-form button:hover { opacity: .9; }
+
+/* FOOTER */
+footer {
+  max-width: 1180px; margin: 0 auto;
+  padding: 32px 28px;
+  border-top: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 13px; color: var(--mute);
+  font-family: 'Space Grotesk', sans-serif;
+}
+footer a { color: var(--mute); }
+footer a:hover { color: var(--text); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .featured-take-inner {
+    grid-template-columns: 1fr;
+    padding: 32px 28px;
+  }
+  .ft-author { display: none; }
+  .takes-grid { grid-template-columns: 1fr; }
+  .subscribe-inner { flex-direction: column; text-align: center; }
+  .subscribe-form { width: 100%; }
+  .subscribe-form input { flex: 1; width: auto; }
+  footer { flex-direction: column; gap: 8px; text-align: center; }
+}
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .featured-take-inner { padding: 24px 20px; }
+  .ft-headline { font-size: 22px; }
+  .subscribe-form { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="nav-inner">
+    <div class="logo"><a href="index.html"><span class="logo-dot"></span>Ambient Advantage</a></div>
+    <div class="nav-links">
+      <a href="https://podcast.ambient-advantage.ai">Podcast</a>
+      <a href="https://briefing.ambient-advantage.ai">Daily Briefing</a>
+      <a href="index.html" class="active">Chiel's Take</a>
+    </div>
+    <a href="#subscribe" class="nav-cta">Subscribe</a>
+  </div>
+</nav>
+
+<!-- FEATURED LATEST TAKE -->
+<div class="featured-take">
+  <div class="featured-take-inner">
+    <div>
+      <div class="ft-label">
+        <span class="ft-label-dot"></span>
+        Latest Take
+      </div>
+      <span class="ft-tag">Opinion</span>
+      <h2 class="ft-headline"><a href="dont-flinch.html">Don't Flinch</a></h2>
+      <p class="ft-excerpt">Organizations that abandon agentic AI projects at the first stumble are making a costly mistake. The gap between 85% and 97% accuracy is a prompting problem, not a model problem — and the companies that push through are building real advantages.</p>
+      <div class="ft-meta">
+        <span class="author">Chiel Hendriks</span>
+        <span>&middot;</span>
+        <span>5 min read</span>
+        <span>&middot;</span>
+        <span>April 19, 2026</span>
+      </div>
+      <a href="dont-flinch.html" class="ft-read-btn">Read the full take &rarr;</a>
+    </div>
+    <div class="ft-author">
+      <div class="ft-author-avatar">CH</div>
+      <div class="ft-author-name">Chiel Hendriks</div>
+      <div class="ft-author-title">Managing Director, PwC Canada<br>Ex-Google &middot; 16 years</div>
+      <p class="ft-author-bio">Where the daily briefing tells you what happened in AI, this column tells you what it means — and what to do about it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- INTRO — while there's only one article -->
+<div class="intro-section">
+  <div class="intro-inner">
+    <h2>This is new territory</h2>
+    <p>Chiel's Take is where the daily news becomes actionable strategy. Expect opinion pieces, analysis, and perspective on what matters in AI — written for the people making decisions, not just the people building models. More takes coming soon.</p>
+    <div class="intro-links">
+      <a href="https://briefing.ambient-advantage.ai">Read the Daily Briefing</a>
+      <a href="https://podcast.ambient-advantage.ai">Listen to the Podcast</a>
+    </div>
+  </div>
+</div>
+
+<!-- SUBSCRIBE -->
+<div class="subscribe-section" id="subscribe">
+  <div class="subscribe-inner">
+    <div class="subscribe-text">
+      <h3>Get notified when Chiel publishes</h3>
+      <p>AI strategy perspectives for business leaders. No fixed schedule — just substance when there's something worth saying.</p>
+    </div>
+    <div class="subscribe-form">
+      <input type="email" placeholder="your@email.com">
+      <button>Subscribe</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>&copy; 2026 Ambient Advantage</div>
+  <div>
+    <a href="https://briefing.ambient-advantage.ai" style="margin-right:20px">Daily Briefing</a>
+    <a href="https://podcast.ambient-advantage.ai" style="margin-right:20px">Podcast</a>
+    <a href="index.html">Chiel's Take</a>
+  </div>
+</footer>
+
+</body>
+</html>
