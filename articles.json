@@ -1,5 +1,15 @@
 [
   {
+    "slug": "cfos-are-starting-to-code",
+    "title": "CFOs Are Starting to Code (and SaaS Companies Should Pay Attention)",
+    "tag": "Opinion",
+    "date": "2026-04-20",
+    "date_display": "April 20, 2026",
+    "read_time": "5 min read",
+    "excerpt": "A finance exec I spoke with recently vibe coded his way to a credible replacement for parts of his Workday and Concur stack. The SaaS moats that held for a decade are narrowing, and vendors coasting on comfort are more exposed than they realize.",
+    "featured": true
+  },
+  {
     "slug": "dont-flinch",
     "title": "Don't Flinch",
     "tag": "Opinion",
@@ -7,6 +17,6 @@
     "date_display": "April 19, 2026",
     "read_time": "5 min read",
     "excerpt": "Organizations that abandon agentic AI projects at the first stumble are making a costly mistake. The gap between 85% and 97% accuracy is a prompting problem, not a model problem — and the companies that push through are building real advantages.",
-    "featured": true
+    "featured": false
   }
 ]
