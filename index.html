@@ -60,74 +60,86 @@ nav.top {
 }
 .nav-cta:hover { border-color: var(--accent); text-decoration: none; }
 
-/* FEATURED TAKE — Full width hero */
-.featured-take {
-  margin: 32px auto 0;
-  max-width: 1180px; padding: 0 28px;
+/* ========= FEATURED STACK (up to 3 leaderboard cards) ========= */
+.featured-stack {
+  max-width: 1180px; margin: 32px auto 0; padding: 0 28px;
+  display: flex; flex-direction: column; gap: 20px;
 }
-.featured-take-inner {
+
+/* Leaderboard card — shared base */
+.lb-card {
   background: linear-gradient(135deg, rgba(245,166,35,.07) 0%, rgba(245,166,35,.02) 50%, rgba(78,168,255,.03) 100%);
   border: 1px solid rgba(245,166,35,.22);
   border-radius: 20px;
-  padding: 48px 56px;
+  padding: 44px 52px;
+  position: relative; overflow: hidden;
+  transition: border-color .2s, transform .2s;
+}
+.lb-card:hover { border-color: rgba(245,166,35,.45); transform: translateY(-2px); }
+.lb-card::before {
+  content: '';
+  position: absolute; top: -80px; right: -80px;
+  width: 220px; height: 220px;
+  background: radial-gradient(circle, rgba(245,166,35,.08), transparent 70%);
+  pointer-events: none;
+}
+
+/* Card 1 — "Latest" variant with author sidebar */
+.lb-card.is-latest {
   display: grid;
   grid-template-columns: 1fr 300px;
   gap: 48px;
   align-items: center;
-  position: relative;
-  overflow: hidden;
-}
-.featured-take-inner::before {
-  content: '';
-  position: absolute; top: -80px; right: -80px;
-  width: 240px; height: 240px;
-  background: radial-gradient(circle, rgba(245,166,35,.1), transparent 70%);
-  pointer-events: none;
+  padding: 48px 56px;
+  border-color: rgba(245,166,35,.32);
+  background: linear-gradient(135deg, rgba(245,166,35,.10) 0%, rgba(245,166,35,.03) 50%, rgba(78,168,255,.04) 100%);
 }
 
-.ft-label {
+.lb-label {
   display: inline-flex; align-items: center; gap: 8px;
   font-size: 12px; color: var(--warm);
   font-family: 'Space Grotesk', sans-serif;
   letter-spacing: .1em; text-transform: uppercase;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
-.ft-label-dot {
+.lb-label-dot {
   width: 6px; height: 6px; border-radius: 50%;
   background: var(--warm);
   animation: pulse 2s ease-in-out infinite;
 }
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: .4; }
-}
-.ft-tag {
+.lb-label.muted { color: var(--mute); }
+.lb-label.muted .lb-label-dot { background: var(--mute); animation: none; opacity: .6; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
+
+.lb-tag {
   display: inline-block; font-size: 10px; color: var(--warm);
   border: 1px solid rgba(245,166,35,.25); border-radius: 999px;
   padding: 3px 10px; margin-bottom: 14px;
   font-family: 'Space Grotesk', sans-serif; letter-spacing: .08em; text-transform: uppercase;
 }
-.ft-headline {
+.lb-headline {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(24px, 3vw, 34px);
   font-weight: 700; line-height: 1.2;
+  margin-bottom: 14px;
+}
+.lb-card.is-latest .lb-headline { font-size: clamp(24px, 3vw, 34px); }
+.lb-card:not(.is-latest) .lb-headline { font-size: clamp(20px, 2.2vw, 26px); }
+.lb-headline a { color: var(--text); }
+.lb-headline a:hover { color: var(--warm); text-decoration: none; }
+.lb-excerpt {
+  font-size: 15px; color: #b8c4db; line-height: 1.65;
   margin-bottom: 16px;
 }
-.ft-headline a { color: var(--text); }
-.ft-headline a:hover { color: var(--warm); text-decoration: none; }
-.ft-excerpt {
-  font-size: 16px; color: #b8c4db; line-height: 1.7;
-  margin-bottom: 20px;
-}
-.ft-meta {
-  display: flex; align-items: center; gap: 16px;
+.lb-card.is-latest .lb-excerpt { font-size: 16px; line-height: 1.7; margin-bottom: 20px; }
+.lb-meta {
+  display: flex; align-items: center; gap: 14px;
   font-size: 13px; color: var(--mute);
   font-family: 'Space Grotesk', sans-serif;
 }
-.ft-meta .author { color: var(--warm); font-weight: 500; }
-.ft-read-btn {
-  display: inline-block; margin-top: 20px;
-  padding: 12px 28px;
+.lb-meta .author { color: var(--warm); font-weight: 500; }
+.lb-read-btn {
+  display: inline-block; margin-top: 18px;
+  padding: 11px 24px;
   background: linear-gradient(180deg, rgba(245,166,35,.15), rgba(245,166,35,.05));
   border: 1px solid rgba(245,166,35,.3);
   border-radius: 999px;
@@ -136,75 +148,42 @@ nav.top {
   font-size: 14px; font-weight: 500; letter-spacing: .04em;
   transition: border-color .2s, background .2s;
 }
-.ft-read-btn:hover { border-color: var(--warm); background: rgba(245,166,35,.12); text-decoration: none; }
+.lb-read-btn:hover { border-color: var(--warm); background: rgba(245,166,35,.12); text-decoration: none; }
 
-/* Author card (right side) */
-.ft-author {
+/* Author card (only on the Latest card) */
+.lb-author {
   text-align: center;
   padding: 28px 24px;
   background: rgba(5,7,13,.4);
   border: 1px solid rgba(245,166,35,.12);
   border-radius: 16px;
 }
-.ft-author-avatar {
+.lb-author-avatar {
   width: 74px; height: 74px; border-radius: 50%;
   background: linear-gradient(135deg, var(--warm), #d49000);
   padding: 3px;
   margin: 0 auto 14px;
   box-shadow: 0 0 30px rgba(245,166,35,.2);
 }
-.ft-author-avatar img {
+.lb-author-avatar img {
   width: 100%; height: 100%;
   border-radius: 50%;
   object-fit: cover;
   display: block;
 }
-.ft-author-name {
+.lb-author-name {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 17px; font-weight: 600; margin-bottom: 4px;
 }
-.ft-author-title {
+.lb-author-title {
   font-size: 12px; color: var(--mute); margin-bottom: 14px; line-height: 1.5;
 }
-.ft-author-bio {
+.lb-author-bio {
   font-size: 13px; color: #b8c4db; line-height: 1.6;
   text-align: left;
 }
 
-/* EMPTY STATE (shown when there's only one article) */
-.intro-section {
-  max-width: 1180px; margin: 48px auto 0; padding: 0 28px;
-}
-.intro-inner {
-  background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  padding: 48px;
-  text-align: center;
-}
-.intro-inner h2 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 22px; font-weight: 600; margin-bottom: 12px;
-}
-.intro-inner p {
-  font-size: 15px; color: var(--mute); line-height: 1.7;
-  max-width: 560px; margin: 0 auto;
-}
-.intro-links {
-  margin-top: 24px;
-  display: flex; gap: 20px; justify-content: center;
-  font-family: 'Space Grotesk', sans-serif; font-size: 14px;
-}
-.intro-links a {
-  padding: 10px 20px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  color: var(--accent);
-  transition: border-color .2s;
-}
-.intro-links a:hover { border-color: var(--accent); text-decoration: none; }
-
-/* PREVIOUS TAKES */
+/* PREVIOUS TAKES — graduated from leaderboard */
 .prev-section {
   max-width: 1180px; margin: 48px auto 0; padding: 0 28px;
 }
@@ -302,11 +281,12 @@ footer a:hover { color: var(--text); }
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
-  .featured-take-inner {
+  .lb-card.is-latest {
     grid-template-columns: 1fr;
     padding: 32px 28px;
   }
-  .ft-author { display: none; }
+  .lb-author { display: none; }
+  .lb-card { padding: 32px 28px; }
   .takes-grid { grid-template-columns: 1fr; }
   .subscribe-inner { flex-direction: column; text-align: center; }
   .subscribe-form { width: 100%; }
@@ -315,8 +295,8 @@ footer a:hover { color: var(--text); }
 }
 @media (max-width: 600px) {
   .nav-links { display: none; }
-  .featured-take-inner { padding: 24px 20px; }
-  .ft-headline { font-size: 22px; }
+  .lb-card { padding: 24px 20px; }
+  .lb-card.is-latest .lb-headline { font-size: 22px; }
   .subscribe-form { flex-direction: column; }
 }
 </style>
@@ -336,50 +316,57 @@ footer a:hover { color: var(--text); }
   </div>
 </nav>
 
-<!-- FEATURED LATEST TAKE -->
-<div class="featured-take">
-  <div class="featured-take-inner">
+<!-- FEATURED STACK — top 3 stories as leaderboard cards -->
+<div class="featured-stack">
+
+  <!-- CARD 1 — Latest (with author sidebar) -->
+  <article class="lb-card is-latest">
     <div>
-      <div class="ft-label">
-        <span class="ft-label-dot"></span>
+      <div class="lb-label">
+        <span class="lb-label-dot"></span>
         Latest Take
       </div>
-      <span class="ft-tag">Opinion</span>
-      <h2 class="ft-headline"><a href="cfos-are-starting-to-code.html">CFOs Are Starting to Code (and SaaS Companies Should Pay Attention)</a></h2>
-      <p class="ft-excerpt">A finance exec I spoke with recently vibe coded his way to a credible replacement for parts of his Workday and Concur stack. The SaaS moats that held for a decade are narrowing, and vendors coasting on comfort are more exposed than they realize.</p>
-      <div class="ft-meta">
+      <span class="lb-tag">Opinion</span>
+      <h2 class="lb-headline"><a href="cfos-are-starting-to-code.html">CFOs Are Starting to Code (and SaaS Companies Should Pay Attention)</a></h2>
+      <p class="lb-excerpt">A finance exec I spoke with recently vibe coded his way to a credible replacement for parts of his Workday and Concur stack. The SaaS moats that held for a decade are narrowing, and vendors coasting on comfort are more exposed than they realize.</p>
+      <div class="lb-meta">
         <span class="author">Chiel Hendriks</span>
         <span>&middot;</span>
         <span>5 min read</span>
         <span>&middot;</span>
         <span>April 20, 2026</span>
       </div>
-      <a href="cfos-are-starting-to-code.html" class="ft-read-btn">Read the full take &rarr;</a>
+      <a href="cfos-are-starting-to-code.html" class="lb-read-btn">Read the full take &rarr;</a>
     </div>
-    <div class="ft-author">
-      <div class="ft-author-avatar"><img src="chiel.jpg" alt="Chiel Hendriks"></div>
-      <div class="ft-author-name">Chiel Hendriks</div>
-      <div class="ft-author-title">Managing Director, PwC Canada<br>Ex-Google &middot; 16 years</div>
-      <p class="ft-author-bio">Where the daily briefing tells you what happened in AI, this column tells you what it means — and what to do about it.</p>
+    <aside class="lb-author">
+      <div class="lb-author-avatar"><img src="chiel.jpg" alt="Chiel Hendriks"></div>
+      <div class="lb-author-name">Chiel Hendriks</div>
+      <div class="lb-author-title">Managing Director, PwC Canada<br>Ex-Google &middot; 16 years</div>
+      <p class="lb-author-bio">Where the daily briefing tells you what happened in AI, this column tells you what it means — and what to do about it.</p>
+    </aside>
+  </article>
+
+  <!-- CARD 2 — Recent (no author sidebar) -->
+  <article class="lb-card">
+    <div class="lb-label muted"><span class="lb-label-dot"></span>Recent</div>
+    <span class="lb-tag">Opinion</span>
+    <h2 class="lb-headline"><a href="dont-flinch.html">Don't Flinch</a></h2>
+    <p class="lb-excerpt">Organizations that abandon agentic AI projects at the first stumble are making a costly mistake. The gap between 85% and 97% accuracy is a prompting problem, not a model problem — and the companies that push through are building real advantages.</p>
+    <div class="lb-meta">
+      <span class="author">Chiel Hendriks</span>
+      <span>&middot;</span>
+      <span>5 min read</span>
+      <span>&middot;</span>
+      <span>April 19, 2026</span>
     </div>
-  </div>
+    <a href="dont-flinch.html" class="lb-read-btn">Read the full take &rarr;</a>
+  </article>
+
+  <!-- CARD 3 will appear here when a 3rd story is published -->
+
 </div>
 
-<!-- PREVIOUS TAKES -->
-<div class="prev-section">
-  <div class="prev-section-header">
-    <h2>Previous Takes</h2>
-  </div>
-  <div class="takes-grid">
-    <div class="take-card">
-      <span class="take-tag">Opinion</span>
-      <div class="take-date">April 19, 2026</div>
-      <h3><a href="dont-flinch.html">Don't Flinch</a></h3>
-      <p class="take-excerpt">Organizations that abandon agentic AI projects at the first stumble are making a costly mistake. The gap between 85% and 97% accuracy is a prompting problem, not a model problem — and the companies that push through are building real advantages.</p>
-      <a href="dont-flinch.html" class="take-read">Read &rarr;</a>
-    </div>
-  </div>
-</div>
+<!-- PREVIOUS TAKES — appears once a 4th story graduates from the leaderboard -->
 
 <!-- SUBSCRIBE -->
 <div class="subscribe-section" id="subscribe">
