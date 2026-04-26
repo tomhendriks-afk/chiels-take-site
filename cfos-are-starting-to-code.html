@@ -53,12 +53,12 @@ nav.top {
 .nav-links a:hover { color: var(--text); text-decoration: none; }
 .nav-links a.active { color: var(--warm); font-weight: 500; }
 .nav-cta {
-  border: 1px solid var(--line); padding: 9px 16px; border-radius: 999px;
-  background: linear-gradient(180deg, rgba(78,168,255,.12), rgba(78,168,255,.02));
+  border: 1px solid rgba(245,166,35,.35); padding: 9px 16px; border-radius: 999px;
+  background: linear-gradient(180deg, rgba(245,166,35,.12), rgba(245,166,35,.02));
   font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 500;
-  color: var(--accent); letter-spacing: .02em; transition: border-color .2s;
+  color: var(--warm); letter-spacing: .02em; transition: border-color .2s, color .2s;
 }
-.nav-cta:hover { border-color: var(--accent); text-decoration: none; }
+.nav-cta:hover { border-color: var(--warm); color: var(--warm); text-decoration: none; }
 
 /* ARTICLE */
 .article-wrapper {
