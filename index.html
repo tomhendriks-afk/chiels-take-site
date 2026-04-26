@@ -296,8 +296,11 @@ footer a:hover { color: var(--text); }
 .mobile-nav { display: none; }
 
 @media (max-width: 600px) {
-  .nav-links { display: none; 
-  .mobile-nav { display: none; }
+  .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .lb-card { padding: 24px 20px; }
+  .lb-card.is-latest .lb-headline { font-size: 22px; }
+  .subscribe-form { flex-direction: column; }
   body { padding-bottom: 72px; }
   .mobile-nav {
     display: flex;
@@ -325,10 +328,6 @@ footer a:hover { color: var(--text); }
   }
   .mobile-nav a.active svg { stroke: var(--warm); stroke-width: 2; }
   .mobile-nav a.active span { color: var(--warm); font-weight: 600; }
-}
-  .lb-card { padding: 24px 20px; }
-  .lb-card.is-latest .lb-headline { font-size: 22px; }
-  .subscribe-form { flex-direction: column; }
 }
 </style>
 </head>

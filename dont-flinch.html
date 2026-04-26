@@ -182,8 +182,13 @@ footer a:hover { color: var(--text); }
 .mobile-nav { display: none; }
 
 @media (max-width: 600px) {
-  .nav-links { display: none; 
-  .mobile-nav { display: none; }
+  .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .article-wrapper { padding: 32px 20px 60px; }
+  .article-title { font-size: 26px; }
+  .subscribe-form { flex-direction: column; }
+  .subscribe-form input { width: 100%; }
+  footer { flex-direction: column; gap: 8px; text-align: center; }
   body { padding-bottom: 72px; }
   .mobile-nav {
     display: flex;
@@ -211,12 +216,6 @@ footer a:hover { color: var(--text); }
   }
   .mobile-nav a.active svg { stroke: var(--warm); stroke-width: 2; }
   .mobile-nav a.active span { color: var(--warm); font-weight: 600; }
-}
-  .article-wrapper { padding: 32px 20px 60px; }
-  .article-title { font-size: 26px; }
-  .subscribe-form { flex-direction: column; }
-  .subscribe-form input { width: 100%; }
-  footer { flex-direction: column; gap: 8px; text-align: center; }
 }
 </style>
 </head>
