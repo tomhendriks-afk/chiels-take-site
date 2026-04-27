@@ -3,7 +3,7 @@ title: The AI users who are actually winning don't prototype. They ship.
 tag: Opinion
 date: 2026-04-26
 read_time: 4
-excerpt: Cat Wu, Anthropic's Head of PM, shared three insights on Lenny's Podcast that cut straight to why most people aren't getting real value from AI yet — and what the ones who are doing differently.
+excerpt: Cat Wu, Anthropic's Head of PM, shared three insights on Lenny's Podcast that cut straight to why most people aren't getting real value from AI yet; and what the ones who are doing differently.
 ---
 
 Cat Wu, Anthropic's Head of PM, was on [Lenny's Podcast](https://www.lennysnewsletter.com/p/how-anthropics-product-team-moves) recently. Three things she said stuck with me.
@@ -14,11 +14,11 @@ For me, this was creating a personal finance overview. Ever since Mint.com disap
 
 Her second point is where most people give up. Getting an automation to 95% feels like progress. It isn't. If it fails one time in twenty, you're still babysitting it. You haven't automated anything, you've just created a new thing to monitor. The last few percentage points take longer than everything before them. That's not a flaw in the process. That is the process. The fix: teach Claude your preferences, close the edge cases, get it to the point where you genuinely forget it's running. The 95% solution has almost no value. The 100% solution changes your day.
 
-The Daily Briefings and Podcasts on [Ambient-Advantage.AI](https://ambient-advantage.ai) are my personal example of this — 100% fully automated, pulled together through a pipeline I built with Claude's support over the course of a few weeks. An extra hour here and there, outside of work and family time. But I pushed, and I didn't stop until both were completely automated.
+The Daily Briefings and Podcasts on [Ambient-Advantage.AI](https://ambient-advantage.ai) are my personal example of this; 100% fully automated, pulled together through a pipeline I built with Claude's support over the course of a few weeks. An extra hour here and there, outside of work and family time. But I pushed, and I didn't stop until both were completely automated.
 
 The third insight hit closest to home. Most people build something, show it off, and move on. Cat's question cuts through that: are you actually using this every single day? Because that daily use is where the value compounds. A prototype you demoed once isn't an AI win. It's a proof of concept gathering dust. Build the thing you rely on. Then build the next one.
 
-My pipeline started with some tinkering, but through daily use it grew into something I couldn't have planned upfront — a fully automated system running in Google Cloud, pushing code to GitHub, updating the site automatically through Cloudflare. Along the way it created a need to understand how to have agents comb through information, transform it into an HTML email, generate a podcast transcript, figure out text-to-speech (hello [ElevenLabs](https://elevenlabs.io)), and on from there.
+My pipeline started with some tinkering, but through daily use it grew into something I couldn't have planned upfront; a fully automated system running in Google Cloud, pushing code to GitHub, updating the site automatically through Cloudflare. Along the way it created a need to understand how to have agents comb through information, transform it into an HTML email, generate a podcast transcript, figure out text-to-speech (hello [ElevenLabs](https://elevenlabs.io)), and on from there.
 
 This project taught me more about Google Cloud than my previous ten years talking about it. That's what daily use actually does.
 
