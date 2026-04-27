@@ -1,5 +1,15 @@
 [
   {
+    "slug": "the-ai-users-who-are-actually-winning-dont-prototype-they-ship",
+    "title": "The AI users who are actually winning don't prototype. They ship.",
+    "tag": "Opinion",
+    "date": "2026-04-26",
+    "date_display": "April 26, 2026",
+    "read_time": "4 min read",
+    "excerpt": "Cat Wu, Anthropic's Head of PM, shared three insights on Lenny's Podcast that cut straight to why most people aren't getting real value from AI yet \u2014 and what the ones who are doing differently.",
+    "featured": true
+  },
+  {
     "slug": "cfos-are-starting-to-code",
     "title": "CFOs Are Starting to Code (and SaaS Companies Should Pay Attention)",
     "tag": "Opinion",
@@ -7,7 +17,7 @@
     "date_display": "April 20, 2026",
     "read_time": "5 min read",
     "excerpt": "A finance exec I spoke with recently vibe coded his way to a credible replacement for parts of his Workday and Concur stack. The SaaS moats that held for a decade are narrowing, and vendors coasting on comfort are more exposed than they realize.",
-    "featured": true
+    "featured": false
   },
   {
     "slug": "dont-flinch",
@@ -16,7 +26,7 @@
     "date": "2026-04-19",
     "date_display": "April 19, 2026",
     "read_time": "5 min read",
-    "excerpt": "Organizations that abandon agentic AI projects at the first stumble are making a costly mistake. The gap between 85% and 97% accuracy is a prompting problem, not a model problem — and the companies that push through are building real advantages.",
+    "excerpt": "Organizations that abandon agentic AI projects at the first stumble are making a costly mistake. The gap between 85% and 97% accuracy is a prompting problem, not a model problem \u2014 and the companies that push through are building real advantages.",
     "featured": false
   }
 ]
