@@ -209,7 +209,7 @@ def render_latest_card(a: dict) -> str:
       <div class="lb-author-avatar"><img src="chiel.jpg" alt="Chiel Hendriks"></div>
       <div class="lb-author-name">Chiel Hendriks</div>
       <div class="lb-author-title">Managing Director, PwC Canada<br>Ex-Google &middot; 16 years</div>
-      <p class="lb-author-bio">Where the daily briefing tells you what happened in AI, this column tells you what it means — and what to do about it.</p>
+      <p class="lb-author-bio">My observations and reflections on how AI is changing business; and what to do about it.</p>
     </aside>
   </article>'''
 
