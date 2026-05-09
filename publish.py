@@ -318,39 +318,40 @@ def update_articles_json(meta: dict) -> list:
     return articles
 
 
-# ---------- Beehiiv subscriber notification ----------
+# ---------- Buttondown subscriber notification ----------
 
-def notify_beehiiv_chiels_take(meta: dict, article_url: str) -> None:
-    """Send a notification email to Chiel's Take Beehiiv subscribers.
+def notify_buttondown_chiels_take(meta: dict, article_url: str) -> None:
+    """Send a notification email to Buttondown subscribers when a new Take ships.
 
-    Reads two env vars:
-      BEEHIIV_API_KEY                    — your Beehiiv API key
-      BEEHIIV_PUBLICATION_ID_CHIELS_TAKE — publication ID from Beehiiv dashboard
+    Reads one env var:
+      BUTTONDOWN_API_KEY — your Buttondown API key
+                            (get one at https://buttondown.com/settings/api)
 
-    Skips silently if either env var is missing so publish.py works without
-    Beehiiv configured (e.g. before you've set it up, or in a dry run).
+    Skips silently if the env var is missing so publish.py works without
+    Buttondown configured (e.g. before you've set it up, or in a dry run).
+
+    Buttondown's send endpoint is a single POST that creates the email and
+    triggers immediate delivery — no draft/patch/confirm dance like Beehiiv.
 
     Stdlib-only: uses urllib.request (no external deps).
-    API reference: https://developers.beehiiv.com/docs/v2/posts-create
+    API reference: https://docs.buttondown.com/api-emails-create
     """
     import os
     import json
-    import time
     import urllib.request
     import urllib.error
-    from datetime import datetime, timezone
 
-    api_key = os.environ.get("BEEHIIV_API_KEY", "").strip()
-    publication_id = os.environ.get("BEEHIIV_PUBLICATION_ID_CHIELS_TAKE", "").strip()
-
-    if not api_key or not publication_id:
-        print("  beehiiv:   skipped — BEEHIIV_API_KEY or BEEHIIV_PUBLICATION_ID_CHIELS_TAKE not set")
+    api_key = os.environ.get("BUTTONDOWN_API_KEY", "").strip()
+    if not api_key:
+        print("  buttondown: skipped — BUTTONDOWN_API_KEY not set")
         return
 
     subject = f"New Take: {meta['title']}"
-    preview = meta["excerpt"][:150]
 
-    html_body = f"""
+    # Buttondown auto-detects HTML vs Markdown; we force HTML mode explicitly
+    # via the editor-mode comment so there's no ambiguity. The {{ tokens }}
+    # are substituted per-recipient by Buttondown.
+    html_body = f"""<!-- buttondown-editor-mode: fancy -->
 <div style="font-family:Georgia,serif;max-width:600px;margin:0 auto;padding:24px;color:#1a1a1a;">
   <p style="font-size:13px;color:#888;margin:0 0 8px;">CHIEL'S TAKE — {meta['date_display'].upper()}</p>
   <h1 style="font-size:26px;margin:0 0 12px;line-height:1.3;">{meta['title']}</h1>
@@ -362,66 +363,45 @@ def notify_beehiiv_chiels_take(meta: dict, article_url: str) -> None:
   </a>
   <hr style="margin:32px 0;border:none;border-top:1px solid #eee;">
   <p style="font-size:12px;color:#aaa;">
-    You're receiving this because you subscribed to Chiel's Take at
+    You're receiving this because you subscribed at
     <a href="https://take.ambient-advantage.ai" style="color:#aaa;">take.ambient-advantage.ai</a>.
+    <a href="{{{{ unsubscribe_url }}}}" style="color:#aaa;">Unsubscribe</a> &middot;
+    <a href="{{{{ email_url }}}}" style="color:#aaa;">View in browser</a>
   </p>
 </div>
 """
 
-    def _beehiiv_request(method: str, path: str, payload: dict) -> dict:
-        url = f"https://api.beehiiv.com/v2{path}"
-        data = json.dumps(payload).encode("utf-8")
-        req = urllib.request.Request(
-            url,
-            data=data,
-            headers={
-                "Authorization": f"Bearer {api_key}",
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-            },
-            method=method,
-        )
-        try:
-            with urllib.request.urlopen(req, timeout=30) as resp:
-                return json.loads(resp.read().decode("utf-8"))
-        except urllib.error.HTTPError as exc:
-            body = exc.read().decode("utf-8", errors="replace")
-            raise RuntimeError(f"Beehiiv API {exc.code} {method} {path}: {body}") from exc
+    payload = {
+        "subject": subject,
+        "body": html_body,
+        "status": "about_to_send",   # send immediately to all active subscribers
+        "email_type": "public",      # post to the public archive on Buttondown
+    }
+    data = json.dumps(payload).encode("utf-8")
+    req = urllib.request.Request(
+        "https://api.buttondown.com/v1/emails",
+        data=data,
+        headers={
+            "Authorization": f"Token {api_key}",
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+        },
+        method="POST",
+    )
 
     try:
-        # Step 1: create draft post
-        create_resp = _beehiiv_request("POST", f"/publications/{publication_id}/posts", {
-            "subject_line": subject,
-            "preview_text": preview,
-            "authors": [],
-            "content_tags": [],
-            "status": "draft",
-            "split_test_enabled": False,
-            "displayed_date": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.000Z"),
-        })
-        post_id = (create_resp.get("data") or {}).get("id")
-        if not post_id:
-            raise RuntimeError(f"No post ID returned: {create_resp}")
-
-        # Step 2: set HTML content
-        _beehiiv_request("PATCH", f"/publications/{publication_id}/posts/{post_id}", {
-            "content": {
-                "free_web_content": html_body,
-                "free_email_content": html_body,
-            }
-        })
-
-        # Step 3: confirm for immediate delivery
-        _beehiiv_request("PATCH", f"/publications/{publication_id}/posts/{post_id}", {
-            "status": "confirmed",
-            "send_at": int(time.time()),
-        })
-
-        print(f"  beehiiv:   sent to Chiel's Take subscribers (post_id={post_id})")
-
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            body = resp.read().decode("utf-8")
+            payload_resp = json.loads(body) if body else {}
+        email_id = payload_resp.get("id", "(no id returned)")
+        print(f"  buttondown: sent to subscribers (email_id={email_id})")
+    except urllib.error.HTTPError as exc:
+        body = exc.read().decode("utf-8", errors="replace")
+        print(f"  buttondown: WARNING — send failed: HTTP {exc.code}: {body[:300]}")
+        print("              (article was still published; subscribers were not notified)")
     except Exception as exc:  # noqa — notify failures must not block publishing
-        print(f"  beehiiv:   WARNING — send failed: {exc}")
-        print("             (article was still published; subscribers were not notified)")
+        print(f"  buttondown: WARNING — send failed: {exc}")
+        print("              (article was still published; subscribers were not notified)")
 
 
 # ---------- main ----------
@@ -458,9 +438,9 @@ def publish(draft_path: Path) -> None:
     prev_count = max(0, len(articles) - 3)
     print(f"  rebuilt:   index.html — {stack_count} in leaderboard, {prev_count} in Previous Takes")
 
-    # 4. Notify Beehiiv subscribers (best-effort — skips if env vars not set)
+    # 4. Notify Buttondown subscribers (best-effort — skips if env var not set)
     article_url = f"https://take.ambient-advantage.ai/{meta['slug']}.html"
-    notify_beehiiv_chiels_take(meta, article_url)
+    notify_buttondown_chiels_take(meta, article_url)
 
     print()
     print("Done. Next steps:")
