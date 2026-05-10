@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Don't Flinch — Chiel's Take</title>
-<meta name="description" content="Organizations that abandon agentic AI projects at the first stumble are making a costly mistake. The gap between 85% and 97% accuracy is a prompting problem, not a model problem.">
+<meta name="description" content="Organizations that abandon agentic AI projects at the first stumble are making a costly mistake. The gap between 85% and 97% accuracy is a prompting problem, not a model problem — and the companies that push through are building real advantages.">
+<link rel="alternate" type="text/markdown" href="dont-flinch.md">
 <meta property="og:title" content="Don't Flinch — Chiel's Take">
-<meta property="og:description" content="Organizations that abandon agentic AI projects at the first stumble are making a costly mistake.">
+<meta property="og:description" content="Organizations that abandon agentic AI projects at the first stumble are making a costly mistake. The gap between 85% and 97% accuracy is a prompting problem, not a model problem — and the companies that push through are building real advantages.">
 <meta property="og:type" content="article">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -148,14 +149,14 @@ nav.top {
 .subscribe-form {
   display: flex; gap: 10px; justify-content: center;
 }
-.subscribe-form input {
+.subscribe-form input[type="email"] {
   width: 260px; padding: 12px 16px;
   background: var(--bg-0); border: 1px solid var(--line);
   border-radius: 10px; color: var(--text);
   font-family: 'Inter', sans-serif; font-size: 14px;
   outline: none; transition: border-color .2s;
 }
-.subscribe-form input:focus { border-color: var(--warm); }
+.subscribe-form input[type="email"]:focus { border-color: var(--warm); }
 .subscribe-form button {
   padding: 12px 24px;
   background: linear-gradient(180deg, var(--warm), #d4900f);
@@ -187,7 +188,7 @@ footer a:hover { color: var(--text); }
   .article-wrapper { padding: 32px 20px 60px; }
   .article-title { font-size: 26px; }
   .subscribe-form { flex-direction: column; }
-  .subscribe-form input { width: 100%; }
+  .subscribe-form input[type="email"] { width: 100%; }
   footer { flex-direction: column; gap: 8px; text-align: center; }
   body { padding-bottom: 72px; }
   .mobile-nav {
@@ -249,7 +250,7 @@ footer a:hover { color: var(--text); }
   </div>
 
   <div class="article-body">
-    <p>I keep seeing the same story play out.</p>
+        <p>I keep seeing the same story play out.</p>
 
     <p>An organization starts strong. Real executive buy-in, a clear process to automate, a team that's genuinely excited about building something with agents. The architects sketch out the orchestration. The first sprint delivers a working prototype. Everyone's nodding.</p>
 
@@ -327,7 +328,6 @@ footer a:hover { color: var(--text); }
     <a href="https://build.ambient-advantage.ai">Build Log</a>
   </div>
 </footer>
-
 
 <nav class="mobile-nav" aria-label="Mobile navigation">
   <a href="https://podcast.ambient-advantage.ai">

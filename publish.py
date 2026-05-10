@@ -35,6 +35,8 @@ ARTICLE_TEMPLATE = REPO_ROOT / "_template.html"
 INDEX_TEMPLATE = REPO_ROOT / "_index_template.html"
 ARTICLES_JSON = REPO_ROOT / "articles.json"
 INDEX_PATH = REPO_ROOT / "index.html"
+INDEX_MD_PATH = REPO_ROOT / "index.md"
+SITE_BASE_URL = "https://take.ambient-advantage.ai"
 
 
 # ---------- frontmatter + markdown parsing ----------
@@ -178,11 +180,48 @@ def render_article(meta: dict, body_html: str) -> str:
         "{{TAG}}": meta["tag"],
         "{{READ_TIME}}": meta["read_time"],
         "{{DATE_DISPLAY}}": meta["date_display"],
+        "{{SLUG}}": meta["slug"],
         "{{ARTICLE_BODY}}": body_html,
     }
     for k, v in replacements.items():
         template = template.replace(k, v)
     return template
+
+
+def render_article_md(meta: dict, body_md: str) -> str:
+    """Markdown twin of the article — H1, byline + date, then body verbatim.
+
+    Served at /<slug>.md so LLMs and agents can fetch clean markdown instead
+    of parsing HTML. No site nav, no footer, no chrome.
+    """
+    return (
+        f"# {meta['title']}\n"
+        f"\n"
+        f"*By Chiel Hendriks · Published {meta['date_display']} · "
+        f"{meta['read_time']} min read*\n"
+        f"\n"
+        f"{body_md.rstrip()}\n"
+    )
+
+
+def render_index_md(articles: list) -> str:
+    """Markdown index: short header + bulleted list of every published take."""
+    lines = [
+        "# Chiel's Take",
+        "",
+        "> Opinion column from Chiel Hendriks (Managing Director, PwC Canada). "
+        "Strategic perspective on the agentic and generative AI questions "
+        "business leaders should be asking. All published takes, newest-first.",
+        "",
+        "## Articles",
+        "",
+    ]
+    for a in articles:
+        url = f"{SITE_BASE_URL}/{a['slug']}.html"
+        lines.append(
+            f"- [{a['title']}]({url}) — {a['date_display']} · {a['excerpt']}"
+        )
+    return "\n".join(lines) + "\n"
 
 
 def render_latest_card(a: dict) -> str:
@@ -427,18 +466,28 @@ def publish(draft_path: Path) -> None:
     article_out.write_text(article_html)
     print(f"  wrote:     {article_out.relative_to(REPO_ROOT)}")
 
-    # 2. Update articles.json
+    # 2. Render markdown twin (.md sibling for LLM/agent consumption)
+    article_md = render_article_md(meta, body_md)
+    article_md_out = REPO_ROOT / f"{meta['slug']}.md"
+    article_md_out.write_text(article_md)
+    print(f"  wrote:     {article_md_out.relative_to(REPO_ROOT)}")
+
+    # 3. Update articles.json
     articles = update_articles_json(meta)
     print(f"  updated:   articles.json ({len(articles)} total)")
 
-    # 3. Regenerate index.html
+    # 4. Regenerate index.html
     index_html = render_index(articles)
     INDEX_PATH.write_text(index_html)
     stack_count = min(3, len(articles))
     prev_count = max(0, len(articles) - 3)
     print(f"  rebuilt:   index.html — {stack_count} in leaderboard, {prev_count} in Previous Takes")
 
-    # 4. Notify Buttondown subscribers (best-effort — skips if env var not set)
+    # 5. Regenerate index.md (markdown twin of homepage)
+    INDEX_MD_PATH.write_text(render_index_md(articles))
+    print(f"  rebuilt:   index.md")
+
+    # 6. Notify Buttondown subscribers (best-effort — skips if env var not set)
     article_url = f"https://take.ambient-advantage.ai/{meta['slug']}.html"
     notify_buttondown_chiels_take(meta, article_url)
 
