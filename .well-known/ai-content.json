@@ -1,0 +1,48 @@
+{
+  "name": "Chiel's Take",
+  "description": "Opinion column from Chiel Hendriks (Managing Director, PwC Canada). Strategic perspective on the agentic and generative AI questions business leaders should be asking. Hand-written, no automation.",
+  "owner": {
+    "name": "Chiel Hendriks",
+    "url": "https://www.linkedin.com/in/chielhendriks/"
+  },
+  "llms_txt": "https://take.ambient-advantage.ai/llms.txt",
+  "endpoints": [
+    {
+      "name": "Articles index (JSON)",
+      "url": "https://take.ambient-advantage.ai/articles.json",
+      "type": "application/json",
+      "description": "Every published take — slug, title, date, read time, excerpt. Sorted newest-first."
+    },
+    {
+      "name": "Full archive (markdown)",
+      "url": "https://take.ambient-advantage.ai/llms-full.txt",
+      "type": "text/markdown",
+      "description": "Every published take inlined as full markdown for LLM consumption."
+    },
+    {
+      "name": "Markdown homepage",
+      "url": "https://take.ambient-advantage.ai/index.md",
+      "type": "text/markdown",
+      "description": "Bulleted markdown index of every published take."
+    },
+    {
+      "name": "Per-article markdown twin",
+      "url": "https://take.ambient-advantage.ai/{slug}.md",
+      "type": "text/markdown",
+      "description": "Clean-markdown twin of any article — substitute the slug from articles.json."
+    },
+    {
+      "name": "LLM/agent guide",
+      "url": "https://take.ambient-advantage.ai/llms.txt",
+      "type": "text/plain",
+      "description": "Site overview, every published take, and pointers."
+    }
+  ],
+  "related_sites": [
+    "https://ambient-advantage.ai",
+    "https://briefing.ambient-advantage.ai",
+    "https://take.ambient-advantage.ai",
+    "https://podcast.ambient-advantage.ai",
+    "https://build.ambient-advantage.ai"
+  ]
+}
