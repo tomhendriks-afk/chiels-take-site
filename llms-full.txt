@@ -1,0 +1,135 @@
+# Chiel's Take — Full Archive
+
+> Every published "Chiel's Take" article inlined as full markdown for LLM consumption. Sorted newest-first. Author: Chiel Hendriks, Managing Director at PwC Canada. Site: https://take.ambient-advantage.ai
+
+The views expressed are the author's own and do not reflect the views of PwC.
+
+---
+
+## The AI users who are actually winning don't prototype. They ship.
+
+*April 26, 2026 · 4 min read · Opinion · [original article](https://take.ambient-advantage.ai/the-ai-users-who-are-actually-winning-dont-prototype-they-ship.html)*
+
+Cat Wu, Anthropic's Head of PM, was on [Lenny's Podcast](https://www.lennysnewsletter.com/p/how-anthropics-product-team-moves) recently. Three things she said stuck with me.
+
+The first: stop asking what AI can do. Start asking what you actually need done. Look at the tasks you do on repeat, the ones you've been putting off for months, the work that keeps falling through the cracks. That's your list. Solve those first, for yourself, before you solve them for anyone else.
+
+For me, this was creating a personal finance overview. Ever since Mint.com disappeared I had been meaning to build some sort of master Excel sheet and keep it up to date. You guessed it, never happened. Until a few weeks ago, when I used Claude to build a personal app to keep track of my finances across a bunch of accounts. The whole thing came together over a few evenings, maybe 8 to 10 hours total, spread across a week. Not in some drag-and-drop no-code builder, but as a real application with a backend API, authentication, a data feed, and deployment to a production URL I can open on my phone. I built it using Claude, Google Apps Scripts, and Gemini as my AI programmer. I now have an accurate read on where I am across all my accounts. Vibe coded by yours truly.
+
+Her second point is where most people give up. Getting an automation to 95% feels like progress. It isn't. If it fails one time in twenty, you're still babysitting it. You haven't automated anything, you've just created a new thing to monitor. The last few percentage points take longer than everything before them. That's not a flaw in the process. That is the process. The fix: teach Claude your preferences, close the edge cases, get it to the point where you genuinely forget it's running. The 95% solution has almost no value. The 100% solution changes your day.
+
+The Daily Briefings and Podcasts on [Ambient-Advantage.AI](https://ambient-advantage.ai) are my personal example of this; 100% fully automated, pulled together through a pipeline I built with Claude's support over the course of a few weeks. An extra hour here and there, outside of work and family time. But I pushed, and I didn't stop until both were completely automated.
+
+The third insight hit closest to home. Most people build something, show it off, and move on. Cat's question cuts through that: are you actually using this every single day? Because that daily use is where the value compounds. A prototype you demoed once isn't an AI win. It's a proof of concept gathering dust. Build the thing you rely on. Then build the next one.
+
+My pipeline started with some tinkering, but through daily use it grew into something I couldn't have planned upfront; a fully automated system running in Google Cloud, pushing code to GitHub, updating the site automatically through Cloudflare. Along the way it created a need to understand how to have agents comb through information, transform it into an HTML email, generate a podcast transcript, figure out text-to-speech (hello [ElevenLabs](https://elevenlabs.io)), and on from there.
+
+This project taught me more about Google Cloud than my previous ten years talking about it. That's what daily use actually does.
+
+So start with something that matters to you. Solve one of your problems, and solve it well. Not solve it mostly. All the way. That's how AI starts working for you, and how your own skills grow in the process.
+
+---
+
+## CFOs Are Starting to Code (and SaaS Companies Should Pay Attention)
+
+*April 20, 2026 · 5 min read · Opinion · [original article](https://take.ambient-advantage.ai/cfos-are-starting-to-code.html)*
+
+A CFO I spoke with recently has been vibe coding (aka natural language programming), on his own, a solution that handles a lot of what his company pays category leaders like Workday and SAP Concur for today. He is not a developer. He has no engineering background. He is planning to work with his IT team to roll it out module by module, and he cannot wait to start turning off some of the SaaS subscriptions his finance team has been paying for.
+
+That conversation has been sitting with me for a few weeks. It is the clearest signal I have seen that the disruption story around SaaS is no longer theoretical.
+
+Not every SaaS product is at risk. Some categories have real moats: deep integrations, regulatory footprint, network effects, decades of hardened workflow logic. But the idea that a finance executive can build something functional enough to replace parts of a multi-million dollar stack, on his own, in evenings and weekends, would have sounded absurd eighteen months ago. Today it is happening, and the CFO I spoke with is not the only one.
+
+## The pedestal we built around code
+
+Somewhere along the way we turned coding into a destination. It became an identity, a career track, a credential, a gatekeeping mechanism. That was never what it actually was.
+
+Coding was always just a way to get to an outcome. It was how you built a product, fixed a broken process, lowered a cost, improved an experience, or unlocked something humans could not do before. Self-driving cars. Fraud detection at scale. Recommendations that learn your taste better than your friends do. The goal was never the code. The goal was the thing the code made possible.
+
+What is happening with the current generation of AI coding tools is that the pedestal is being lowered. Not because coding is less valuable, but because the ability to translate an idea into working software is becoming more accessible to anyone with a clear outcome in mind.
+
+## The tools doing the lifting
+
+Claude Code & Cowork, Google's Antigravity, ChatGPT's Codex, and others are democratizing capabilities that used to take years of training to tackle. They are not perfect. They produce slop. They hallucinate. Sometimes the code does not work. Anyone who has used them seriously knows this.
+
+But the curve is steep. What these tools could not do six months ago, they do routinely today. What they cannot do today, many will do by the end of the year. Betting against that trajectory has been a losing trade for three years running. The real disruption isn't just building cheaper; it's AI's potential to maintain and debug that code just as cheaply.
+
+More importantly, the people using them do not need to be engineers. They need to understand their business, articulate what they want, iterate with the model, and have enough judgment to spot when something is off. Those are skills a lot of operators already have. The CFO I mentioned is one example. I expect to see many more in the next twelve months.
+
+## Why this matters for SaaS
+
+For a long time, a certain class of SaaS vendor had an effective monopoly on a certain class of workflow. The workflow was valuable enough that building it from scratch was not worth the effort. The vendor charged accordingly. Customers were locked in and paid.
+
+That calculation is shifting. When a capable operator can assemble a working prototype in a weekend, the build-versus-buy conversation changes. It does not mean the SaaS vendor loses. It means the vendor has to be offering something the customer cannot quickly recreate. Depth of functionality, reliability, ecosystem, compliance posture, customer success, the network of integrations built over a decade. Those are still real moats. Comfort is not.
+
+The SaaS companies that will keep winning are the ones that treat this moment as a forcing function. They will invest in the things that are genuinely hard to replicate, and make sure their customers feel that value every quarter. The ones coasting on inertia are in a more exposed position than they realize.
+
+## The enterprise reality check
+
+A weekend prototype is not an enterprise system. Production software at scale needs things that do not show up in a demo: access controls, audit trails, data lineage, disaster recovery, security review, integration testing, change management, and support processes.
+
+This is where the real work begins. The interesting organizations I am watching are not the ones saying "anyone can build anything now." They are building lightweight enablement paths where business users can prototype, IT can vet and harden, and the best ideas graduate into properly supported internal systems. That is a very different operating model from the one most enterprises run today, and building it is going to take intention.
+
+The sprawl risk is also real. Without the right guardrails, you end up with hundreds of half-finished internal tools, each with its own security posture, each depending on one person who remembers how it works. That is not a step forward, it is a different kind of mess.
+
+## What I would be doing right now
+
+A few practical moves, depending on where you sit.
+
+If you are an operator, pick the one or two workflows that are most painful and least well served by your current tools. Spend ten focused hours in one of the AI coding environments. Not to replace anything in production, but to calibrate. The gap between what you think these tools can do and what they can actually do is probably larger than you expect.
+
+If you are a SaaS vendor, audit your product honestly. Which parts of what you sell could a motivated customer rebuild in a weekend? What are you doing to stay worth the price when that becomes obvious to more of your buyers? The answer needs to be better than "we have always been here."
+
+If you are in IT, start designing the rails now. Business users are going to build things. The question is whether you shape that energy into something safe and scalable, or whether you discover it in a breach report eighteen months from now.
+
+---
+
+## Don't Flinch
+
+*April 19, 2026 · 5 min read · Opinion · [original article](https://take.ambient-advantage.ai/dont-flinch.html)*
+
+I keep seeing the same story play out.
+
+An organization starts strong. Real executive buy-in, a clear process to automate, a team that's genuinely excited about building something with agents. The architects sketch out the orchestration. The first sprint delivers a working prototype. Everyone's nodding.
+
+Then the demo stumbles. The agent hallucinates on an edge case. It nails 85% of inputs but trips on something weird — an input nobody anticipated, a request phrased in a way the prompt didn't account for. Confidence wavers. And suddenly people are floating "maybe we should go back to a rules-based approach" or "let's pause and revisit in six months."
+
+I've started calling it the flinch. And it's where good projects go to die.
+
+## It's a prompting problem, not a model problem
+
+Here's what I keep telling teams when they hit that wall: the gap between 85% and 97% accuracy almost never means the model can't do it. It means you're talking to it wrong.
+
+The pattern is always the same. Someone built one massive prompt that tries to handle the entire process in a single pass. Every exception, every edge case, every piece of conditional logic — all crammed into one set of instructions. Then they're surprised when the model gets confused.
+
+That's not how this works. You break the problem apart. You give each sub-agent a specific, well-scoped job. You write tight prompts for each step. You add checks between stages. Think of it less like writing one giant instruction manual and more like building a team where each person has a clear role.
+
+The teams that push through and do this work? They get to 97%. And 97% with a human reviewing the remaining 3% is a massive outcome for most business processes. That's not a compromise. That's a win.
+
+## You're delivering into a future, not into today
+
+This is the part that really gets me. I regularly see projects with 6-to-18-month delivery horizons. Think about that. If you build on traditional, static architecture, you're delivering a solution in late 2027 that was designed with legacy thinking from before the agentic wave.
+
+The models are getting better fast. The orchestration tools are maturing. The governance frameworks are catching up. Six months from now, the agent ecosystem will be meaningfully more capable than it is today. That means the agentic foundations you lay now only become more powerful over time. You're not betting on today's technology — you're riding a curve that's still accelerating.
+
+Building on legacy patterns for a project with a year-plus timeline is like wiring a new office for fax machines in 2010. Sure, it works. But you're investing in the wrong direction.
+
+Every serious IT project or digital transformation right now needs agentic AI baked in from the start. Not as a phase two add-on. Not as a nice-to-have once the "real" system is done. As a core design choice.
+
+## Cold feet is a leadership problem
+
+When organizations flinch, it's almost never the engineers pulling the plug. It's leadership losing confidence because they expected perfection on the first try.
+
+But we've been here before. Nobody assumed their cloud migration would have zero hiccups. We accepted the bumps because we understood the destination was worth it. Agentic AI deserves the same patience — more, honestly, because the upside is bigger and the underlying tech is improving faster than anything we've seen.
+
+Yes, it takes confidence to set your organization on an AI-driven path. I won't pretend otherwise. You're placing a bet on the technology, on your team's ability to learn, and on where the market is heading. But from where I sit, working with organizations across industries: this is the clearest path to staying competitive in what's coming.
+
+The companies that push through the flinch — that treat the first stumble as useful data, not a reason to retreat — are building real advantages. The ones that pull back? They'll restart the same project 18 months from now, having lost both the learning and the head start.
+
+## Here's the thing
+
+If you're in the middle of an agentic AI project and it feels hard, that's normal. That's what building something that matters feels like from the inside. The hallucinations can be reduced. The accuracy can be improved. The architecture can be sharpened.
+
+But only if you stay in the game.
+
+Don't flinch.
