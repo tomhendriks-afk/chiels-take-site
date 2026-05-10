@@ -30,6 +30,8 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
+import _jsonld  # sibling module — schema.org JSON-LD builders
+
 REPO_ROOT = Path(__file__).parent.resolve()
 ARTICLE_TEMPLATE = REPO_ROOT / "_template.html"
 INDEX_TEMPLATE = REPO_ROOT / "_index_template.html"
@@ -182,6 +184,7 @@ def render_article(meta: dict, body_html: str) -> str:
         "{{DATE_DISPLAY}}": meta["date_display"],
         "{{SLUG}}": meta["slug"],
         "{{ARTICLE_BODY}}": body_html,
+        "{{JSONLD}}": _jsonld.article(meta),
     }
     for k, v in replacements.items():
         template = template.replace(k, v)
@@ -324,7 +327,12 @@ def render_index(articles: list) -> str:
     else:
         prev_html = ""
 
-    return template.replace("{{FEATURED_STACK}}", featured_html).replace("{{PREV_SECTION}}", prev_html)
+    return (
+        template
+        .replace("{{FEATURED_STACK}}", featured_html)
+        .replace("{{PREV_SECTION}}", prev_html)
+        .replace("{{JSONLD}}", _jsonld.index())
+    )
 
 
 # ---------- articles.json bookkeeping ----------
