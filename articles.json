@@ -1,5 +1,15 @@
 [
   {
+    "slug": "picking-the-model-is-the-easy-part-now",
+    "title": "Picking the Model Is the Easy Part Now",
+    "tag": "Opinion",
+    "date": "2026-05-10",
+    "date_display": "May 10, 2026",
+    "read_time": "2 min read",
+    "excerpt": "Picking the model is the easy part. The harder calls \u2014 where to run, which platform to bet on, and how to keep your agents portable \u2014 are what determine whether an agentic AI program actually scales.",
+    "featured": true
+  },
+  {
     "slug": "the-ai-users-who-are-actually-winning-dont-prototype-they-ship",
     "title": "The AI users who are actually winning don't prototype. They ship.",
     "tag": "Opinion",
@@ -7,7 +17,7 @@
     "date_display": "April 26, 2026",
     "read_time": "4 min read",
     "excerpt": "Cat Wu, Anthropic's Head of PM, shared three insights on Lenny's Podcast that cut straight to why most people aren't getting real value from AI yet; and what the ones who are doing differently.",
-    "featured": true
+    "featured": false
   },
   {
     "slug": "cfos-are-starting-to-code",
